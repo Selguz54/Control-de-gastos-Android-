@@ -34,9 +34,22 @@ jobs:
           npm run build
           npx cap add android
           npx cap sync android
+          
           sed -i 's/<application/<application android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path("android/app/src/main/AndroidManifest.xml")
+          s = p.read_text()
+          if "com.google.android.gms.ads.APPLICATION_ID" not in s:
+              meta = '<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />'
+              s = re.sub(r'(<application\b[^>]*>)', r'\1\n        ' + meta, s, count=1)
+              p.write_text(s)
+          PY
           cd android
           chmod +x gradlew
+
           ./gradlew assembleDebug
 
       - name: Guardar APK
