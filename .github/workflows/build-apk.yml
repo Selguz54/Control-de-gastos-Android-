@@ -28,7 +28,7 @@ jobs:
 
       - name: Descomprimir proyecto
         run: |
-          unzip -o Control_de_Gastos_Firebase.zip -d proyecto
+          unzip -o Control_de_Gastos_Proyecto_Android_AdMob.zip -d proyecto
           cd proyecto/Control_de_Gastos_Android
           npm install
           npm run build
