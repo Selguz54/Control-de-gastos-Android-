@@ -29,7 +29,7 @@ jobs:
       - name: Descomprimir proyecto
         run: |
           unzip -o Control_de_Gastos_Proyecto_Android_AdMob.zip -d proyecto
-          cd proyecto/Control_de_Gastos_Android
+          cd proyecto
           npm install
           npm run build
           npx cap add android
